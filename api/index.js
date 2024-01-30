@@ -9,24 +9,15 @@ import listingRouter from './routes/listing.route.js';
 import path from 'path';
 dotenv.config();
 
-const app = express();
-
-// Middleware to get the client's IP address
-app.use(requestIp.mw());
-
-// Get the client's IP address from the request
-app.use((req, res, next) => {
-  const clientIp = req.clientIp;
-  console.log('Client IP Address:', clientIp);
-  next();
-});
 
 mongoose.connect(process.env.MONGO).then(() => {
   console.log('Connected to MongoDB');
 }).catch((err) => {
-  console.error('Error connecting to MongoDB:', err.message);
-  process.exit(1); // Exit the process with a failure code
+  console.error(err);
+  
 });
+
+const app = express();
 
 const __dirname=path.resolve();
 
