@@ -108,21 +108,42 @@ try {
 }
 }
 
+// const handleShowListings = async () => {
+//   try {
+//     setshowListingsError(false);
+//     const res = await fetch(`/api/user/listings/${currentUser._id}`);
+//     const data = await res.json();
+//     if(data.success === false) {
+//       showListingsError(true);
+//       return;
+//     }
+
+//     setUserListings(data);
+//   } catch (error) {
+//     setshowListingsError(true);
+//   }
+// };
+
+
 const handleShowListings = async () => {
   try {
     setshowListingsError(false);
     const res = await fetch(`/api/user/listings/${currentUser._id}`);
     const data = await res.json();
-    if(data.success === false) {
-      showListingsError(true);
+    if (data.success === false) {
+      setshowListingsError(true);
       return;
     }
 
     setUserListings(data);
+    
+    // Print the count to the console
+    console.log('Number of Listings:', data.length);
   } catch (error) {
     setshowListingsError(true);
   }
 };
+
 
 const handleListingDelete = async (listingId) => {
 try {
