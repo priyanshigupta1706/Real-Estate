@@ -71,22 +71,20 @@ export default function Home() {
 
       {/* swiper */}
       <Swiper navigation>
-        {offerListings &&
-          offerListings.length > 0 &&
-          offerListings.map((listing) => (
-            // eslint-disable-next-line react/jsx-key
-            <SwiperSlide>
-              <div
-                style={{
-                  background: `url(${listing.imageUrls[0]}) center no-repeat`,
-                  backgroundSize: 'cover',
-                }}
-                className='h-[500px]'
-                key={listing._id}
-              ></div>
-            </SwiperSlide>
-          ))}
-      </Swiper>
+  {offerListings &&
+    offerListings.length > 0 &&
+    offerListings.map((listing) => (
+      <SwiperSlide key={listing._id}>
+        <div
+          style={{
+            background: `url(${listing.imageUrls[0]}) center no-repeat`,
+            backgroundSize: 'cover',
+          }}
+          className='h-[500px]'
+        ></div>
+      </SwiperSlide>
+    ))}
+</Swiper>
 
       {/* listing results for offer, sale and rent */}
 
