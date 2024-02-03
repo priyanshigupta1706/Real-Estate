@@ -4,10 +4,13 @@ import { getDownloadURL, getStorage,ref, uploadBytesResumable} from 'firebase/st
 import { app } from '../firebase';
 import { updateUserFailure , updateUserStart , updateUserSuccess , deleteUserStart, deleteUserSuccess , deleteUserFailure, signOutUserStart} from '../redux/user/userSlice';
  import {useDispatch} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link , useNavigate} from 'react-router-dom';
 
 
 export default function Profile() {
+
+  const navigate = useNavigate();
+
   const fileRef=useRef(null);
   const {currentUser,loading,error} = useSelector((state) => state.user)
   const [file,setFile] = useState(undefined);
@@ -144,6 +147,22 @@ const handleShowListings = async () => {
   }
 };
 
+const handleCreateListingClick = async () => {
+  try {
+    const res = await fetch(`/api/user/listings/${currentUser._id}`);
+    const data = await res.json();
+    setUserListings(data);
+
+    if (data.length < 2) {
+      navigate('/create-listing');
+    } else {
+      navigate('/subscription-page');
+    }
+  } catch (error) {
+    // Handle error, if any
+    console.error('Error fetching user listings:', error);
+  }
+};
 
 const handleListingDelete = async (listingId) => {
 try {
@@ -160,7 +179,7 @@ try {
 } catch (error) {
   console.log(error.message)
 }
-}
+};
 
 
   return (
@@ -192,10 +211,22 @@ try {
         <input type="password" placeholder='password' id='password' className='border p-3 rounded-lg' onChange={handleChange} />
         <button disabled={loading} className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'>{loading ? 'Loading...' : 'Update'}</button>
 
-<Link className='bg-green-700 text-white rounded-lg uppercase text-center hover:opacity-90 p-3' to={"/create-listing"}>
+{/* <Link
+  className='bg-green-700 text-white rounded-lg uppercase text-center hover:opacity-90 p-3'
+  to={currentUser.isPro ? '/subscription-page' : userListings.length < 2 ? '/create-listing' : '/subscription-page'}
+  onClick={handleCreateListingClick}
+>
+  Create Listing
+</Link> */}
+
+
+<Link
+  className='bg-green-700 text-white rounded-lg uppercase text-center hover:opacity-90 p-3'
+  to={userListings.length < 2 ? '/create-listing' : '/subscription-page'}
+  onClick={handleCreateListingClick}
+>
   Create Listing
 </Link>
-
         </form>
         <div className='flex justify-between mt-5'>
           <span onClick={handleDeleteUser} 
