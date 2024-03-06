@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.0.1",
     "@stripe/stripe-js": "^1.29.0",
     "firebase": "^10.7.1",
+    "razorpay": "^0.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.0",
@@ -20,6 +21,7 @@
     "react-router-dom": "^6.21.1",
     "react-stripe-js": "^1.1.5",
     "redux-persist": "^6.0.0",
+    "request": "^2.88.2",
     "swiper": "^11.0.5"
   },
   "devDependencies": {

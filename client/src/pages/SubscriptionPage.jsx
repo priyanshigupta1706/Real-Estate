@@ -1,9 +1,15 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unknown-property */
 // PricingCards.js
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 
 const PricingCards = () => {
+  const handlePayment = async (amount) => {
+    // Redirect user to another page with the amount parameter
+    window.location.href = `/payment-page?amount=${amount}`;
+  };
+
   return (
     <div class="min-h-screen bg-gray-100 overflow-auto">
     <div class="container mx-auto max-w-4xl">
@@ -14,17 +20,26 @@ const PricingCards = () => {
       <div class="mt-8">
         <div class="flex justify-between">
           <div>
-            <p class="text-sm text-gray-600">For more details on all our pricing visit <span class="underline cursor-pointer text-blue-600">here</span></p>
+            {/* <p class="text-sm text-gray-600">For more details on all our pricing visit <span class="underline cursor-pointer text-blue-600">here</span></p> */}
           </div>
           <div class="flex space-x-16">
             <div class="flex">
               <span class="font-semibold inline mr-4">Plan</span>
               <span class="px-4 py-1 rounded-md text-sm bg-gray-300 flex items-center cursor-pointer"
                 >Monthly
-              
+                {/* <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg> */}
               </span>
             </div>
-           
+            {/* <div class="flex">
+              <span class="font-semibold inline mr-4 ">Select currency</span>
+              <span class="px-4 py-1 rounded-md text-sm bg-gray-300 flex items-center cursor-pointer">$ USD
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </div> */}
           </div>
         </div>
         <div></div>
@@ -49,9 +64,12 @@ const PricingCards = () => {
               <li><a href="#" class="font-semibold">It is a long established</a></li>
               <li><a href="#" class="font-semibold">It is a long established</a></li>
             </ul>
-            <div class="text-center bg-gray-800 ">
+            <div className="text-center bg-gray-800">
+                <button onClick={() => handlePayment(10)} className="inline-block my-6 font-bold text-gray-200">Get started today</button>
+              </div>
+            {/* <div class="text-center bg-gray-800 ">
           <button class="inline-block my-6 font-bold text-gray-200">Get started today</button>
-            </div>
+            </div> */}
         </div>
       </div>
       <div class="py-12">
@@ -64,7 +82,7 @@ const PricingCards = () => {
             {/* <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"> */}
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </div>
-            <h1 class="text-4xl text-center font-bold">$30.00</h1>
+            <h1 class="text-4xl text-center font-bold">$20.00</h1>
             <p class="px-4 text-center text-sm ">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem</p>
             <ul class="text-center">
               <li><a href="#" class="font-semibold">It is a long established</a></li>
@@ -72,7 +90,7 @@ const PricingCards = () => {
               <li><a href="#" class="font-semibold">It is a long established</a></li>
             </ul>
             <div class="text-center bg-gray-800 ">
-          <button class="inline-block my-6 font-bold text-gray-200">Get started today</button>
+          <button  onClick={() => handlePayment(20)} class="inline-block my-6 font-bold text-gray-200">Get started today</button>
             </div>
         </div>
       </div>
@@ -95,7 +113,7 @@ const PricingCards = () => {
               <li><a href="#" class="font-semibold">It is a long established</a></li>
             </ul>
             <div class="text-center bg-gray-800 ">
-          <button class="inline-block my-6 font-bold text-gray-200">Get started today</button>
+          <button  onClick={() => handlePayment(30)} class="inline-block my-6 font-bold text-gray-200">Get started today</button>
             </div>
         </div>
       </div>
