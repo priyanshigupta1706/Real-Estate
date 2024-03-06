@@ -227,6 +227,15 @@ try {
 >
   Create Listing
 </Link>
+
+<Link
+  className='bg-blue-700 text-white rounded-lg uppercase text-center hover:opacity-90 p-3 mt-3'
+  to="/subscription-page"
+>
+  Buy Monthly Plan
+</Link>
+
+
         </form>
         <div className='flex justify-between mt-5'>
           <span onClick={handleDeleteUser} 

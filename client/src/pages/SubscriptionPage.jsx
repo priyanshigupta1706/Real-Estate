@@ -9,7 +9,7 @@ const PricingCards = () => {
     <div class="container mx-auto max-w-4xl">
       <div class="mt-10 text-center">
         <h1 class="text-4xl font-bold text-gray-800">Pricing plans</h1>
-        <p class="text-lg mt-3 font-semibold">Hope you're enjoying our services. To continue enjoying them, subscribe to our plans!</p>
+        <p class="text-lg mt-3 font-semibold">Hope you are enjoying our services. To continue enjoying them, subscribe to our plans!</p>
       </div>
       <div class="mt-8">
         <div class="flex justify-between">
@@ -21,19 +21,10 @@ const PricingCards = () => {
               <span class="font-semibold inline mr-4">Plan</span>
               <span class="px-4 py-1 rounded-md text-sm bg-gray-300 flex items-center cursor-pointer"
                 >Monthly
-                {/* <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg> */}
+              
               </span>
             </div>
-            {/* <div class="flex">
-              <span class="font-semibold inline mr-4 ">Select currency</span>
-              <span class="px-4 py-1 rounded-md text-sm bg-gray-300 flex items-center cursor-pointer">$ USD
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
-            </div> */}
+           
           </div>
         </div>
         <div></div>
