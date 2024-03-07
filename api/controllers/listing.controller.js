@@ -88,13 +88,17 @@ export const getListings = async (req,res,next) => {
         }
     
         const searchTerm = req.query.searchTerm || '';
+        const address = req.query.address || '';
     
         const sort = req.query.sort || 'createdAt';
     
         const order = req.query.order || 'desc';
     
         const listings = await Listing.find({
-          name: { $regex: searchTerm, $options: 'i' },
+            $or: [
+                { name: { $regex: searchTerm, $options: 'i' } },
+                { address: { $regex: searchTerm, $options: 'i' } }, // Search by address
+              ],
           offer,
           furnished,
           parking,

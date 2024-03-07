@@ -31,8 +31,7 @@ class PaymentPage extends React.Component {
       image: 'https://example.com/your_logo.png',
       handler: function(response) {
           alert(response.razorpay_payment_id);
-          //window.location.href = '/success';
-          // Handle payment success
+          window.location.href = '/create-listing';
       },
       prefill: {
           name: 'Gaurav Kumar',
@@ -54,7 +53,7 @@ class PaymentPage extends React.Component {
   render() {
     return (
       <div>
-        <h1>Payment Page</h1>
+        <h1></h1>
         {/* Optionally, you can include additional content here */}
       </div>
     );

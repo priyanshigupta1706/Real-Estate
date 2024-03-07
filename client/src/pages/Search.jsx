@@ -68,16 +68,19 @@ export default function Search() {
   }, [location.search]);
 
   const handleChange = (e) => {
+    if (e.target.id === 'searchTerm') {
+      setSidebardata({ ...sidebardata, searchTerm: e.target.value });
+    } else if (e.target.id === 'address') {
+      setSidebardata({ ...sidebardata, address: e.target.value });
+    }
+  
+
     if (
       e.target.id === 'all' ||
       e.target.id === 'rent' ||
       e.target.id === 'sale'
     ) {
       setSidebardata({ ...sidebardata, type: e.target.id });
-    }
-
-    if (e.target.id === 'searchTerm') {
-      setSidebardata({ ...sidebardata, searchTerm: e.target.value });
     }
 
     if (
@@ -145,6 +148,19 @@ export default function Search() {
               onChange={handleChange}
             />
           </div>
+          {/* <div className='flex items-center gap-2'>
+            <label className='whitespace-nowrap font-semibold'>
+              Address:
+            </label>
+            <input
+              type='text'
+              placeholder='Address'
+              className='border p-3 rounded-lg'
+              id='address'
+              onChange={handleChange}
+              value={sidebardata.searchTerm}
+            />
+          </div> */}
           <div className='flex gap-2 flex-wrap items-center'>
             <label className='font-semibold'>Type:</label>
             <div className='flex gap-2'>
