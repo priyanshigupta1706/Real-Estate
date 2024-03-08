@@ -31,7 +31,8 @@ class PaymentPage extends React.Component {
       image: 'https://example.com/your_logo.png',
       handler: function(response) {
           alert(response.razorpay_payment_id);
-          window.location.href = '/create-listing';
+            window.location.href = `/create-listing?paymentId=${response.razorpay_payment_id}`;
+          // window.location.href = '/create-listing';
       },
       prefill: {
           name: 'Gaurav Kumar',
