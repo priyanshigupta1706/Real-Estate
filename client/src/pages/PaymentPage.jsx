@@ -3,7 +3,6 @@ import React from 'react';
 class PaymentPage extends React.Component {
   constructor(props) {
     super(props);
-    // Retrieve the 'amount' parameter from the URL query string
     const searchParams = new URLSearchParams(window.location.search);
     this.amount = searchParams.get('amount');
     this.razorpayScriptURL = 'https://checkout.razorpay.com/v1/checkout.js';
@@ -24,26 +23,26 @@ class PaymentPage extends React.Component {
   initiatePayment = () => {
     const options = {
       key: this.razorpayKey,
-      amount: this.amount*100, // Amount in paise
+      amount: this.amount * 100,
       currency: 'INR',
       name: 'Real Estate',
       description: 'Test Transaction',
       image: 'https://example.com/your_logo.png',
-      handler: function(response) {
-          alert(response.razorpay_payment_id);
-            window.location.href = `/create-listing?paymentId=${response.razorpay_payment_id}`;
-          // window.location.href = '/create-listing';
+      handler: (response) => {
+        console.log('Payment successful:', response);
+        // Make an API call to your backend to store payment success
+        this.storePaymentSuccess(response.razorpay_payment_id);
       },
       prefill: {
-          name: 'Gaurav Kumar',
-          email: 'gaurav.kumar@example.com',
-          contact: '9999999999'
+        name: 'Gaurav Kumar',
+        email: 'gaurav.kumar@example.com',
+        contact: '9999999999'
       },
       notes: {
-          address: 'Razorpay Corporate Office'
+        address: 'Razorpay Corporate Office'
       },
       theme: {
-          color: '#3399cc'
+        color: '#3399cc'
       }
     };
 
@@ -51,10 +50,33 @@ class PaymentPage extends React.Component {
     razorpay.open();
   };
 
+  storePaymentSuccess = (paymentId) => {
+    fetch('/api/createpayment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ paymentId })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to store payment');
+      }
+      console.log('Payment stored successfully');
+      // Redirect or do any other action after storing the payment
+      window.location.href = `/create-listing?paymentId=${paymentId}`;
+    })
+    .catch(error => {
+      console.error('Error storing payment:', error);
+      // Handle error scenario
+    });
+  };
+  
+
   render() {
     return (
       <div>
-        <h1></h1>
+        <h1>Payment Page</h1>
         {/* Optionally, you can include additional content here */}
       </div>
     );
