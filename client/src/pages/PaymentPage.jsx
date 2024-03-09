@@ -35,7 +35,7 @@ class PaymentPage extends React.Component {
       },
       prefill: {
         name: 'Gaurav Kumar',
-        email: 'gaurav.kumar@example.com',
+        email: '',
         contact: '9999999999'
       },
       notes: {
@@ -51,12 +51,12 @@ class PaymentPage extends React.Component {
   };
 
   storePaymentSuccess = (paymentId) => {
-    fetch('/api/createpayment', {
+    fetch('/api/payment/payment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ paymentId })
+      body: JSON.stringify({ paymentId, amount: this.amount })
     })
     .then(response => {
       if (!response.ok) {
@@ -76,7 +76,7 @@ class PaymentPage extends React.Component {
   render() {
     return (
       <div>
-        <h1>Payment Page</h1>
+        <h1></h1>
         {/* Optionally, you can include additional content here */}
       </div>
     );

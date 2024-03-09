@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
-app.use('/api/createpayment', createPaymentRouter); // Use createPaymentRouter to handle createpayment requests
+app.use('/api/payment', createPaymentRouter); // Use createPaymentRouter to handle createpayment requests
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
