@@ -14,6 +14,10 @@ const paymentSchema = new Schema({
     type: Number,
     required: true
   },
+  userEmail: {
+    type: String,
+    required: true,
+  },
 }, {
   timestamps: true
 });

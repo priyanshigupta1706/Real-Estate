@@ -1,8 +1,8 @@
-import {Link, useNavigate} from 'react-router-dom' 
-import { useState } from 'react'
-import {useDispatch , useSelector} from 'react-redux'
-import { signInStart ,signInSuccess,signInFailure } from '../redux/user/userSlice';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
+import { signInFailure, signInStart, signInSuccess } from '../redux/user/userSlice';
 
 export default function SignIn() {
     const [formData, setFormData] = useState({});
@@ -28,7 +28,7 @@ export default function SignIn() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
+      localStorage.setItem('authenticated-user', JSON.stringify(data))
       if(data.success === false) {
        dispatch(signInFailure(data.message));
       return;

@@ -8,6 +8,7 @@ class PaymentPage extends React.Component {
     this.razorpayScriptURL = 'https://checkout.razorpay.com/v1/checkout.js';
     this.razorpayKey = 'rzp_test_27gndSTbnRjv7h'; // Replace with your actual Razorpay key
   }
+ 
 
   componentDidMount() {
     const script = document.createElement('script');
@@ -30,8 +31,10 @@ class PaymentPage extends React.Component {
       image: 'https://example.com/your_logo.png',
       handler: (response) => {
         console.log('Payment successful:', response);
+   const {_id} = JSON.parse(localStorage.getItem('authenticated-user'));
+        
         // Make an API call to your backend to store payment success
-        this.storePaymentSuccess(response.razorpay_payment_id);
+        this.storePaymentSuccess(response.razorpay_payment_id,_id);
       },
       prefill: {
         name: 'Gaurav Kumar',
@@ -50,13 +53,13 @@ class PaymentPage extends React.Component {
     razorpay.open();
   };
 
-  storePaymentSuccess = (paymentId) => {
-    fetch('/api/payment/payment', {
+  storePaymentSuccess = (paymentId,id) => {
+    fetch(`/api/payment/payment/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ paymentId, amount: this.amount })
+      body: JSON.stringify({ paymentId, amount: this.amount  })
     })
     .then(response => {
       if (!response.ok) {
@@ -72,8 +75,10 @@ class PaymentPage extends React.Component {
     });
   };
   
+  
 
   render() {
+  
     return (
       <div>
         <h1></h1>

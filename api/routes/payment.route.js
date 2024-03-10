@@ -3,6 +3,6 @@ import { createPayment } from '../controllers/payment.controller.js';
 
 const router = express.Router();
 
-router.post('/payment', createPayment);
+router.post('/payment/:id', createPayment);
 
 export default router;
