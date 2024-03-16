@@ -133,6 +133,10 @@ const PricingCards = () => {
             {/* Plan selection UI can be added here */}
           </div>
           <hr className="mt-10" />
+          {/* Display latest paid card ID */}
+          <div className="text-center mt-4">
+            <p className="text-lg font-semibold">Current plan $ {latestPaidCardId}</p>
+          </div>
           <div className="flex space-x-10 pt-10">
             {/* Map through the unpaid cards and render them */}
             {unpaidCards.map((card, index) => (
