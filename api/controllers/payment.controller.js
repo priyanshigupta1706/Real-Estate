@@ -59,3 +59,20 @@ export const createPayment = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getPaymentsByUserEmail = async (req, res, next) => {
+  const userEmail = req.params.email;
+
+  try {
+    const payments = await Payment.find({ userEmail: userEmail });
+
+    if (!payments || payments.length === 0) {
+      return res.status(404).json({ message: 'No payments found for the user' });
+    }
+
+    res.status(200).json({ payments: payments });
+  } catch (error) {
+    console.error('Failed to fetch payments:', error);
+    res.status(500).json({ message: 'Failed to fetch payments' });
+  }
+};
