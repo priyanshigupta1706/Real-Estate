@@ -8,12 +8,11 @@ const razorpay = new Razorpay({
 });
 
 export const createPayment = async (req, res, next) => {
-
   console.log('User ID:', req.params.id);
   try {
     const amount = req.body.amount;
     const paymentId = req.body.paymentId;
-    const userId = req.params?.id
+    const userId = req.params?.id;
 
     if (!amount || isNaN(amount) || amount <= 0) {
       return res.status(400).json({ message: 'Invalid amount' });
@@ -26,14 +25,22 @@ export const createPayment = async (req, res, next) => {
       payment_capture: 1,
     };
 
-   
-  
-     const user = await User.findById(userId);
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
     const userEmail = user.email;
+
+    // Check if a payment already exists for the user's email
+    const existingPayment = await Payment.findOne({ userEmail: userEmail });
+
+    if (existingPayment) {
+      // If payment exists, update the amount
+      existingPayment.amount = amount;
+      await existingPayment.save();
+      return res.status(200).json({ message: 'Payment amount updated successfully' });
+    }
 
     razorpay.orders.create(options, async (err, order) => {
       if (err) {
@@ -53,12 +60,13 @@ export const createPayment = async (req, res, next) => {
         return res.status(500).json({ message: 'Failed to save payment information' });
       }
 
-      res.status(200).json({ orderId: order.id , userEmail });
+      res.status(200).json({ orderId: order.id, userEmail });
     });
   } catch (error) {
     next(error);
   }
 };
+
 
 export const getPaymentsByUserEmail = async (req, res, next) => {
   const userEmail = req.params.email;
