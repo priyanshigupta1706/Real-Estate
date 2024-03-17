@@ -67,7 +67,8 @@ class PaymentPage extends React.Component {
       }
       console.log('Payment stored successfully');
       // Redirect or do any other action after storing the payment
-      window.location.href = `/create-listing?paymentId=${paymentId}`;
+      //window.location.href = `/create-listing?paymentId=${paymentId}`;
+      window.location.href = `/subscription-page`;
     })
     .catch(error => {
       console.error('Error storing payment:', error);
