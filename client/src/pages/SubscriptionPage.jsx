@@ -162,7 +162,7 @@ const PricingCards = () => {
                 {/* Map through the unpaid cards and render them */}
                 {cardsData.map((card, index) => (
                   <div key={index} className="py-12">
-                    {(card.amount === currentPlan || card.amount === currentPlan + 10) && (
+            {(currentPlan === null || currentPlan === card.amount || currentPlan === card.amount - 10 || currentPlan === card.amount - 20)&& (
                       <div className="bg-white pt-4 rounded-xl space-y-6 overflow-hidden transition-all duration-500 transform hover:-translate-y-6 hover:scale-105 shadow-xl hover:shadow-2xl cursor-pointer">
                         <div className="px-8 flex justify-between items-center">
                           <h1 className="font-bold text-sm sm:text-xl flex flex-wrap-reverse">
