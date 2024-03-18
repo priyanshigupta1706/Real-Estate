@@ -87,7 +87,6 @@
 
 // export default PricingCards;
 import React, { useState, useEffect } from 'react';
-
 const PricingCards = () => {
   const [latestPaidCardId, setLatestPaidCardId] = useState(null);
   const [showPricing, setShowPricing] = useState(true);
@@ -100,8 +99,6 @@ const PricingCards = () => {
     { id: 2, amount: 20, title: 'Real Estate', description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem for $20 plan', features: ['It is a long established', 'It is a long established', 'It is a long established'] },
     { id: 3, amount: 30, title: 'Real Estate', description: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem for $30 plan', features: ['It is a long established', 'It is a long established', 'It is a long established'] },
   ];
-
-
 
   useEffect(() => {
     const storedLatestPaidCardId = localStorage.getItem('latestPaidCardId');
@@ -128,7 +125,7 @@ const PricingCards = () => {
 
   const handleUpgrade = () => {
     if (apiAmount === 10) {
-      setCurrentPlan(20);
+      setCurrentPlan([20, 30]); // Set currentPlan to an array containing both 20 and 30
     } else if (apiAmount === 20) {
       setCurrentPlan(30);
     }
@@ -139,7 +136,7 @@ const PricingCards = () => {
     if (apiAmount === 20) {
       setCurrentPlan(10);
     } else if (apiAmount === 30) {
-      setCurrentPlan(20);
+      setCurrentPlan([10, 20]); // Set currentPlan to an array containing both 10 and 20
     }
     setShowPricing(true); // Show pricing after downgrade
   };
@@ -162,12 +159,12 @@ const PricingCards = () => {
                 {/* Map through the unpaid cards and render them */}
                 {cardsData.map((card, index) => (
                   <div key={index} className="py-12">
-            {(currentPlan === null || currentPlan === card.amount || currentPlan === card.amount - 10 || currentPlan === card.amount - 20)&& (
+                    {(currentPlan === null || (Array.isArray(currentPlan) ? currentPlan.includes(card.amount) : currentPlan === card.amount)) && (
                       <div className="bg-white pt-4 rounded-xl space-y-6 overflow-hidden transition-all duration-500 transform hover:-translate-y-6 hover:scale-105 shadow-xl hover:shadow-2xl cursor-pointer">
                         <div className="px-8 flex justify-between items-center">
                           <h1 className="font-bold text-sm sm:text-xl flex flex-wrap-reverse">
                             <span className="text-slate-500">{card.title}</span>
-                            <span className="text-slate-700">Estate</span>
+                            {/* <span className="text-slate-700"></span> */}
                           </h1>
                         </div>
                         <h1 className="text-4xl text-center font-bold">${card.amount}.00</h1>
@@ -230,3 +227,4 @@ const PricingCards = () => {
 };
 
 export default PricingCards;
+
